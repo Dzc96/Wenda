@@ -24,7 +24,7 @@ public class FeedDaoTests {
      *
      *     Feed getFeedById(int id);
      *
-     *     //这个maxId是干嘛的
+     *
      *     List<Feed> selectUserFeeds(@Param("maxId") int maxId,
      *                                @Param("userIds") List<Integer> userIds,
      *                                @Param("count") int count);
