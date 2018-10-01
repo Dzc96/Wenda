@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dzc.Wenda.dao.QuestionDao">
+    <insert id="addQuestion">
+        insert into question(title, content, user_id, created_date, comment_count)
+        values
+        (#{title}, #{content}, #{userId}, #{createdDate}, #{commentCount})
+    </insert>
+    
+    <select id="selectLatestQuestions" resultType="com.dzc.Wenda.model.Question">
+        select * from question
+        <if test="userId != 0">
+            where user_id = #{userId}
+        </if>
+        order by id desc
+        limit #{offset}, #{limit}
+    </select>
+    
+    <select id="getById" resultType="com.dzc.Wenda.model.Question">
+        select * from question where id = #{id}
+    </select>
+    
+    <update id="updateCommentCount">
+        update question set comment_count = #{commentCount} where id = #{id}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dzc.Wenda.dao.FeedDao">
+    <insert id="addFeed"  useGeneratedKeys="true" keyProperty="id">
+        insert into
+        feed
+        (user_id, data, create_date, type)
+        values
+        (#{userId}, #{data}, #{createDate}, #{type})
+
+    </insert>
+
+
+    <select id="getFeedById" resultType="com.dzc.Wenda.model.Feed">
+        select
+        *
+        from
+        feed
+        where id = #{id}
+    </select>
+
+    <select id="selectUserFeeds" resultType="com.dzc.Wenda.model.Feed">
+        select
+        id, create_date, user_id, data, type
+        from
+        feed
+        WHERE id &lt; #{maxId}
+        <if test="userIds.size() != 0">
+            AND user_id in
+            <foreach item="item" index="index" collection="userIds"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        ORDER BY id DESC
+        LIMIT #{count}
+    </select>
+
+
+
+
+
+
+
+</mapper>

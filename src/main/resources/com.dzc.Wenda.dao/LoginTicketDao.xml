@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dzc.Wenda.dao.LoginTicketDao">
+    <insert id="addTicket">
+        insert into login_ticket (user_id, expired, status, ticket) values (#{userId}, #{expired}, #{status}, #{ticket})
+    </insert>
+
+    <delete id="deleteTicket">
+        delete from login_ticket where id = #{id}
+    </delete>
+
+    <select id="selectByTicket" resultType="com.dzc.Wenda.model.LoginTicket">
+        select * from login_ticket where ticket = #{ticket}
+    </select>
+    
+    <select id="selectByUserId"  resultType="com.dzc.Wenda.model.LoginTicket">
+        select * from login_ticket where user_id = #{userId}
+    </select>
+
+    <update id="updateStatus" >
+        update login_ticket set status = #{status} where ticket = #{ticket}
+    </update>
+
+
+</mapper>

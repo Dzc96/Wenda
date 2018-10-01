@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dzc.Wenda.dao.CommentDao">
+
+    <insert id="addComment">
+        insert into
+        comment(user_id, content, created_date, entity_id, entity_type, status)
+        values
+        (#{userId}, #{content}, #{createdDate}, #{entityId}, #{entityType}, #{status})
+    </insert>
+
+
+   <update id="updateStatus">
+       update comment
+       set
+       status = #{status}
+       where
+       entity_id = #{entityId} and entity_type = #{entityType}
+   </update>
+    
+    <select id="selectByEntity" resultType="com.dzc.Wenda.model.Comment">
+        select * from comment
+        where
+        entity_id = #{entityId} and entity_type = #{entityType}
+        order by id desc
+    </select>
+
+    <select id="getCommentCount" resultType="Integer">
+        select count(id) from comment
+        where
+        entity_id = #{entityId} and entity_type = #{entityType}
+    </select>
+
+
+    <select id="getCommentById" resultType="com.dzc.Wenda.model.Comment">
+        select * from comment
+        where
+        id = #{id}
+    </select>
+
+    <select id="getUserCommentCount" resultType="Integer">
+        select count(*) from comment
+        where
+        user_id = #{userId}
+    </select>
+
+
+
+
+
+
+</mapper>
